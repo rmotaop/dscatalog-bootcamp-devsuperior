@@ -10,20 +10,20 @@ const Navbar = () => (
                 <h4>DS Catalog</h4>
             </Link>
         </div>
-        <div className="col-6 offset-2">
+        <div className="col-6 offset-3">
             <ul className="main-menu">
                 <li>
-                    <NavLink to="/" activeClassName="active" exact> 
+                    <NavLink to="/" exact> 
                         HOME
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/products" activeClassName="active">
+                    <NavLink to="/products" >
                         CATÁLOGO
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/admin" activeClassName="active">
+                    <NavLink to="/admin" >
                         ADMIN
                     </NavLink>
                 </li>
