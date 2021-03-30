@@ -44,7 +44,7 @@ public class ProductRepositoryTests {
 		
 		Page<Product> result = repository.find(null, name, pageRequest );
 		
-		Assertions.assertFalse(result.isEmpty());
+		Assertions.assertTrue(result.isEmpty());
 
 	}
 		
