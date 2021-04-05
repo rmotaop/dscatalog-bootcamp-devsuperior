@@ -1,6 +1,7 @@
 .auth-container {
     display: flex;
-    padding: 40px 40px 100px 82px;
+    padding: 40px 40px 100px;
+    justify-content: center;
 
 }
 
@@ -11,6 +12,7 @@
     color: #263238;
     margin-top: 30px;
     margin-left: 58px;
+    margin-right: 50px;
 }
 
 .auth-info-subtitle {
