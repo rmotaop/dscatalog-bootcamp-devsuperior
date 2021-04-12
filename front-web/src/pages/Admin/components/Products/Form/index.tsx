@@ -1,5 +1,5 @@
-import { makeRequest } from 'core/utils/request';
 import React, { useState } from 'react';
+import { makePrivateRequest } from 'core/utils/request';
 import BaseForm from '../../BaseForm';
 import './styles.scss';
 
@@ -18,7 +18,7 @@ const Form = () => {
     const [formData, setFormData] = useState<FormState>({
         name: '',
         price: '',
-        category: '',
+        category: '1',
         description: ''
     }); 
  
@@ -34,10 +34,15 @@ const Form = () => {
         event.preventDefault();
         const payload = {
             ...formData,
-            imgUrl:'https://www.bing.com/images/search?view=detailV2&ccid=WLqR7FUB&id=D24C6B5F8CDEA672663EA27FE030FF58D2D62C8B&thid=OIP.WLqR7FUBfELKUfjG64hOngHaHa&mediaurl=https%3a%2f%2fassets-prd.ignimgs.com%2f2020%2f06%2f12%2fplaystation-5-button-02-1591933908407.jpg&exph=1961&expw=1961&q=playstation+5&simid=607999827410092804&ck=F0C95CDFE10C1D00E543F77728CBBB60&selectedIndex=1&qft=+filterui%3aaspect-square&FORM=IRPRST&ajaxhist=0',
-         categories: [{ id: formData.category }]
+            imgUrl:'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg',
+            categories: [{ id: formData.category }]
         }
-        makeRequest({url: './products', method: 'POST', data: payload})
+
+        makePrivateRequest({ url: '/products', method: 'POST', data: payload })
+            .then(() => {
+                setFormData({ name: '', price: '', category: '', description: '' });
+            });
+             
     }
 
     return (
@@ -61,8 +66,8 @@ const Form = () => {
                 name="category"
                 >
                 <option value="1">Livros</option>    
-                <option value="3">Computadores</option>
-                <option value="2">Eletrônicos</option>            
+                <option value="2">Eletrônicos</option> 
+                <option value="3">Computadores</option>           
                 </select>
 
                 <span>Preço</span>
@@ -76,6 +81,7 @@ const Form = () => {
                     />
                 </div>
                 <div className="col-6">
+                    <span>Descrição do produto</span>
                     <textarea 
                         name="description" 
                         value={formData.description}

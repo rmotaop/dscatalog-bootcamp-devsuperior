@@ -2,9 +2,9 @@ export const CLIENT_ID = 'dscatalog';
 export const CLIENT_SECRET = 'dscatalog123';
 
 type LoginResponse = {
-    acces_token: string;
+    access_token: string;
     token_type: string;
-    expire_in: number;
+    expires_in: number;
     scope: string;
     userFirstName: string;
     userId: number;
@@ -12,4 +12,11 @@ type LoginResponse = {
 
 export const saveSessionData = (loginResponse: LoginResponse) => {
     localStorage.setItem('authData', JSON.stringify(loginResponse));
+}
+
+export const getSessionData = () => {
+    const sessionData = localStorage.getItem('authData') ?? '{}';
+    const parsedSessionData = JSON.parse(sessionData);
+    
+    return parsedSessionData as LoginResponse;
 }
