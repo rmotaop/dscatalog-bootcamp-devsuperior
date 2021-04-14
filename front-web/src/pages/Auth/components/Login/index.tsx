@@ -1,12 +1,11 @@
-import ButtonIcon from 'core/components/ButtonIcon';
 import React, { useState } from 'react';
+import ButtonIcon from 'core/components/ButtonIcon';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import AuthCard from '../Card';
-import './styles.scss';
 import { makeLogin } from 'core/utils/request';
 import { saveSessionData } from 'core/utils/auth';
-
+import './styles.scss';
 
 type FormData = {
     username: string;
@@ -20,9 +19,9 @@ const Login = () => {
     const { register, handleSubmit, errors } = useForm<FormData>();
     const [hasError, setHasError] = useState(false);
     const history = useHistory();
-    let location = useLocation<LocationState>();
+    const location = useLocation<LocationState>();
 
-    const { from } = location.state || { from: {patnname: "/admin"}};
+    const { from } = location.state || { from: { patnname: "/admin" } };
 
     const onSubmit = (data: FormData) => {
         makeLogin(data)
@@ -48,16 +47,16 @@ const Login = () => {
                 <div className="margin-botton-30">
                     <input
                         type="email"
-                        className={`form-control input-base ${errors.username ? 'is-invalid' : '' } `}
+                        className={`form-control input-base ${errors.username ? 'is-invalid' : ''} `}
                         placeholder="Email"
                         name="username"
                         ref={register({
                             required: "Campo obrigatório",
                             pattern: {
-                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                              message: "Email inválido"
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Email inválido"
                             }
-                          })}
+                        })}
                     />
                     {errors.username && (
                         <div className="invalid-feedback d-block ">
@@ -70,38 +69,38 @@ const Login = () => {
                 <div className="margin-botton-30">
                     <input
                         type="password"
-                        className={`form-control input-base ${errors.password ? 'is-invalid' : '' } `}
+                        className={`form-control input-base ${errors.password ? 'is-invalid' : ''} `}
                         placeholder="Senha"
                         name="password"
                         ref={register({ required: "Campo obrigatório, minimo de 5 caracteres", minLength: 5 })}
                     />
-                      {errors.password && (
+                    {errors.password && (
                         <div className="invalid-feedback d-block ">
                             {errors.password.message}
                         </div>
                     )}
                 </div>
 
-            <Link to="/admin/auth/recover" className="login-link-recover">
-                Esqueci a senha?
+                <Link to="/admin/auth/recover" className="login-link-recover">
+                    Esqueci a senha?
             </Link>
 
-            <div className="login-submit">
-                <ButtonIcon text="LOGAR" />
-            </div>
+                <div className="login-submit">
+                    <ButtonIcon text="LOGAR" />
+                </div>
 
-            <div className="text-center">
-                <span className="not-registered">
-                    Não tem cadastro?
+                <div className="text-center">
+                    <span className="not-registered">
+                        Não tem cadastro?
                 </span>
-                <Link to="/admin/auth/register" className="login-link-register">
-                    CADASTRAR
+                    <Link to="/auth/register" className="login-link-register">
+                        CADASTRAR
             </Link>
-            </div>
-        
+                </div>
+
 
             </form>
-            
+
         </AuthCard >
     )
 
