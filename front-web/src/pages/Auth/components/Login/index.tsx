@@ -7,7 +7,7 @@ import { makeLogin } from 'core/utils/request';
 import { saveSessionData } from 'core/utils/auth';
 import './styles.scss';
 
-type FormData = {
+type FormState = {
     username: string;
     password: string;
 }
@@ -16,14 +16,14 @@ type LocationState = {
 }
 
 const Login = () => {
-    const { register, handleSubmit, errors } = useForm<FormData>();
+    const { register, handleSubmit, errors } = useForm<FormState>();
     const [hasError, setHasError] = useState(false);
     const history = useHistory();
     const location = useLocation<LocationState>();
 
     const { from } = location.state || { from: { patnname: "/admin" } };
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = (data: FormState) => {
         makeLogin(data)
             .then(response => {
                 setHasError(false);
@@ -74,14 +74,14 @@ const Login = () => {
                         name="password"
                         ref={register({ required: "Campo obrigatório, minimo de 5 caracteres", minLength: 5 })}
                     />
-                    {errors.password && (
+                        {errors.password && (
                         <div className="invalid-feedback d-block ">
                             {errors.password.message}
                         </div>
-                    )}
+                        )}
                 </div>
 
-                <Link to="/admin/auth/recover" className="login-link-recover">
+                <Link to="/auth/recover" className="login-link-recover">
                     Esqueci a senha?
             </Link>
 
