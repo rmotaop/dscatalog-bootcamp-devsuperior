@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Pagination from 'core/components/Pagination';
-import { ProductsResponse } from 'core/types/Products';
+import { ProductsResponse } from 'core/types/Product';
 import { makePrivateRequest, makeRequest } from 'core/utils/request';
 import { useHistory } from 'react-router-dom';
 import Card from '../Card';

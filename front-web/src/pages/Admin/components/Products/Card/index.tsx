@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductPrice from 'core/components/ProductPrice';
-import { Product } from 'core/types/Products';
+import { Product } from 'core/types/Product';
 import './styles.scss';
 import { Link } from 'react-router-dom';
 
@@ -26,19 +26,18 @@ const Card = ({ product, onRemove }: Props ) => {
                     </h3>
                     <ProductPrice price={product.price} />
                     <div>
-                        <span className="badge badge-pill badge-secondary mr-2">
-                                Categoria 1
-                        </span>
-                        <span className="badge badge-pill badge-secondary mr-2">
-                                Categoria 2
-                        </span>
+                    {product.categories.map(category => (
+                       <span key={category.id} className="badge rounded-pill bg-secondary mr-2">
+                       {category.name}
+                       </span>
+                    ))}
                     </div>
                 </div>
                 <div className="col-3 pt-3 pr-5">
                     <Link 
                         to={`/admin/products/${product.id}`}
                         type="button" 
-                        className="btn btn-outline-secondary  btn-block border-radius-10 mb-3 btn-edit"
+                        className="btn btn-outline-secondary  btn-block border-radius-10 mb-3 "
                     >
                         EDITAR
                     </Link>

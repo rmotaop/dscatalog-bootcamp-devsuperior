@@ -19,7 +19,7 @@ const Login = () => {
     const { register, handleSubmit, errors } = useForm<FormState>();
     const [hasError, setHasError] = useState(false);
     const history = useHistory();
-    const location = useLocation<LocationState>();
+    let location = useLocation<LocationState>();
 
     const { from } = location.state || { from: { patnname: "/admin" } };
 
@@ -72,7 +72,7 @@ const Login = () => {
                         className={`form-control input-base ${errors.password ? 'is-invalid' : ''} `}
                         placeholder="Senha"
                         name="password"
-                        ref={register({ required: "Campo obrigatório, minimo de 5 caracteres", minLength: 5 })}
+                        ref={register({ required: "Campo obrigatório. Minimo de 5 caracteres", minLength: 5 })}
                     />
                         {errors.password && (
                         <div className="invalid-feedback d-block ">
@@ -82,8 +82,8 @@ const Login = () => {
                 </div>
 
                 <Link to="/auth/recover" className="login-link-recover">
-                    Esqueci a senha?
-            </Link>
+                    Esqueceu a senha?
+                </Link>
 
                 <div className="login-submit">
                     <ButtonIcon text="LOGAR" />
@@ -92,10 +92,10 @@ const Login = () => {
                 <div className="text-center">
                     <span className="not-registered">
                         Não tem cadastro?
-                </span>
+                    </span>
                     <Link to="/auth/register" className="login-link-register">
                         CADASTRAR
-            </Link>
+                    </Link>
                 </div>
 
 
