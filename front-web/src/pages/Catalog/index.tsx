@@ -26,7 +26,7 @@ const Catalog = () => {
 
         }
         setIsLoading(true);
-        makeRequest ({ url: '/products', params })
+        makeRequest({ url: '/products', params })
             .then(response => setProductsResponse(response.data))
             .finally(() => {
                 setIsLoading(false);
@@ -56,34 +56,34 @@ const Catalog = () => {
     return (
         <div className="catalog-container">
             <div className="d-flex justify-content-between">
-            <h1 className="catalog-title">
-                Catálogo de produtos
-            </h1>
-            <ProductFilters 
-                name={name}
-                category={category}
-                handleChangeCategory={handleChangeCategory}
-                handleChangeName={handleChangeName}
-                clearFilters={clearFilters}
-            
-            />
+                <h1 className="catalog-title">
+                    Catálogo de produtos
+                </h1>
+                <ProductFilters
+                    name={name}
+                    category={category}
+                    handleChangeCategory={handleChangeCategory}
+                    handleChangeName={handleChangeName}
+                    clearFilters={clearFilters}
+
+                />
             </div>
             <div className="catalog-products">
-            {isLoading ? <ProductCardLoader /> : (
-                productsResponse?.content.map( product => (
-                    <Link to={`/products/${product.id}`} key={product.id}> 
-                       <ProductCard product={product}/>
-                    </Link>
-                ))
-            )}
+                {isLoading ? <ProductCardLoader /> : (
+                    productsResponse?.content.map(product => (
+                        <Link to={`/products/${product.id}`} key={product.id}>
+                            <ProductCard product={product} />
+                        </Link>
+                    ))
+                )}
 
             </div>
             {productsResponse && (
-            <Pagination 
-                totalpages={productsResponse.totalPages}
-                activePage={activePage}
-                onChange={ page => setActivePage(page) }
-            />
+                <Pagination
+                    totalpages={productsResponse.totalPages}
+                    activePage={activePage}
+                    onChange={page => setActivePage(page)}
+                />
             )}
         </div>
     )

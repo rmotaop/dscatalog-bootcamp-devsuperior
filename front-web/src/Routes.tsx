@@ -16,16 +16,20 @@ const Routes = () => (
             <Route path="/" exact>
                 <Home />
             </Route>
+
             <Route path="/products" exact>
                  <Catalog />
             </Route>
+
             <Route path="/products/:productId">
                 <ProductDetails />
             </Route>
+
             <Redirect from="/auth" to="/auth/login" exact/>
             <Route path="/auth">
                 <Auth/>
             </Route>
+
             <Redirect from="/admin" to="/admin/products" exact/>
             <Route path="/admin">
                 <Admin />

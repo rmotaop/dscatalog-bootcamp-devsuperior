@@ -11,7 +11,6 @@ type Props = {
     handleChangeName: (name: string) => void;
     handleChangeCategory: (Category: Category) => void;
     clearFilters: () => void;
-    
 }
 
 const ProductFilters = ({ 
