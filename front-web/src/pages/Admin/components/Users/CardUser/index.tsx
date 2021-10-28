@@ -11,7 +11,7 @@ const CardUser = ({ user, onRemove }: Props) => {
 
   return(
     <div className="card-base border-radius-10 card-item ">
-      <div className="main-row">
+      <div className="main-row-user">
         <div className="col-user">
           <h2 className="content">{user.firstName} {user.lastName}</h2>
           <span>{user.email}</span>

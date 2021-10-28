@@ -93,15 +93,16 @@ const List = () => {
                         <Card product={product} key={product.id} onRemove={onRemove} />
                     ))
                 )}
-
-                {productsResponse && (
+                    {productsResponse && (
                     <Pagination
                         totalpages={productsResponse.totalPages}
                         activePage={activePage}
                         onChange={page => setActivePage(page)}
                     />
                 )}
+
             </div>
+
 
         </div>
     );

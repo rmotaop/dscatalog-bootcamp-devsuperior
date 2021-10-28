@@ -31,7 +31,7 @@ const Form = () => {
     const [uploadedImgUrl, setUploadedImgUrl] = useState('');
     const [productImgUrl, setProductImgUrl] = useState('');
     const isEditing = productId !== 'create';
-    const formTitle = isEditing ? 'Editar um produto' : 'Cadastrar um produto';
+    const formTitle = isEditing ? 'Editar produto' : 'Cadastrar produto';
 
     
     useEffect(() => {
@@ -88,7 +88,7 @@ const onUploadSuccess = (imgUrl: string) => {
             <BaseForm 
                 title={formTitle}
             >
-                <div className="row">
+                <div className="product-form-container">
                     <div className="col-6">
                         <div className="margin-botton-30">
                             <input
