@@ -63,12 +63,9 @@ public class ProductResource {
 	}
 	
 	@PostMapping(value = "/image")
-	public ResponseEntity<UriDTO> uploadImage(@RequestParam(value = "file") MultipartFile file) {
-
-		String uriImg = service.salvarImageProduct(file);
-        UriDTO uriDto = new UriDTO();
-        uriDto.setUri(uriImg);
-		return ResponseEntity.ok(uriDto);
+	public ResponseEntity<UriDTO> uploadImage(@RequestParam("file") MultipartFile file){
+		UriDTO dto = service.uploadFile(file);
+		return ResponseEntity.ok().body(dto);
 	}
 	
 	

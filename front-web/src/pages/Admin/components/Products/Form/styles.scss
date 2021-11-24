@@ -19,14 +19,51 @@
     color: #9E9E9E;
  
 }
+@media (max-width: 1344px) {
+    .admin-content {
+        width: 100%;
+        
+    }
+    .admin-base-form {
+        width: auto;
+        
+    }
+}
+
+
+
+
+@media (max-width: 960px) {
+    .admin-content {
+        width: 100%;
+      
+    }
+    .admin-base-form {
+        width: auto;
+    
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-content {
+        width: 100%;
+
+    }
+    .admin-base-form {
+        width: auto;
+
+    }
+}
 
 @media (max-width: 576px) {
+    .admin-content {
+        display: flex;
+        flex-direction: column-reverse;
+    }
     .product-form-container {
         width: 100%;
         display: flex;
-        flex-direction: column;
-        margin-left: -15px;
-    
+
 
     input {
         width: 250px;
@@ -39,6 +76,7 @@
 
     .input-base {
         width: 250px;
+
         
     }
     textarea {
