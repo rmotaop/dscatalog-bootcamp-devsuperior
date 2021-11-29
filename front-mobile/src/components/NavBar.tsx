@@ -1,12 +1,14 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import menu from "../assets/menu.png";
-import { nav } from "../styles";
+import { doLogout, isAuthenticated } from "../services/auth";
+import { nav, text } from "../styles";
 
 const NavBar: React.FC = () => {
     const [ show, setShow ] = useState(false);
+    const [authenticated, setAuthenticated] = useState(false);
     const navigation = useNavigation();
     const route = useRoute();
 
@@ -18,16 +20,36 @@ const NavBar: React.FC = () => {
         setShow(false);
     }
 
+    async function logged() {
+        const result = await isAuthenticated();
+    
+        result ? setAuthenticated(true) : setAuthenticated(false);
+      }
+
+    function logout(){
+        doLogout();
+        navigation.navigate("Login");
+    }
+
+    useEffect(() => {
+        logged();
+      }, [])
 
     return (
         <>
+        {authenticated ? (
+            <TouchableOpacity style={nav.logoutBtn} onPress={() => logout()}>
+                <Text style={text.logoutText}>Sair</Text>
+            </TouchableOpacity>         
+        ) : (
+         <>       
         <TouchableOpacity 
             activeOpacity={0.8} 
             style={nav.drawer} 
             onPress={()=> setShow(!show)}
         >
             <Image source={menu}/>
-         
+         </TouchableOpacity>
             {show ? (
                 <View style={nav.options}>
                     <TouchableOpacity 
@@ -58,11 +80,11 @@ const NavBar: React.FC = () => {
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={nav.option}
-                        onPress={() => navigation.navigate("Login")}
+                        onPress={() => navigate("Login")}
                     >
                          <Text style={[
                              nav.textOption, 
-                             route.name === "Login" ? nav.textActive : null,
+                             route.name === "ADM" ? nav.textActive : null,
                              ]}
                         > 
                             ADM 
@@ -71,11 +93,11 @@ const NavBar: React.FC = () => {
                    
                 </View> 
                 ): null}
-               </TouchableOpacity>  
                 </>
-                )             
-                
-          };
+            )}
+        </>
+    )            
+};
 
 
 export default NavBar;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import eyesOpened from "../assets/eyes-opened.png";
 import eyesClosed from "../assets/eyes-closed.png";
@@ -7,7 +8,9 @@ import { theme, text } from '../styles';
 import { login } from "../services/auth";
 
 const Login: React.FC = () => {
+    const navigation = useNavigation();
     const [hidePassword, setHidePassword ] = useState(true);
+    const [userFetchData, setUserFethData] = useState({});
 
     const [userInfo, setUserInfo] = useState(
         {
@@ -18,6 +21,8 @@ const Login: React.FC = () => {
 
     async function handleLogin() {
         const data = await login(userInfo);
+        setUserFethData(data);
+        navigation.navigate("Dashboard");
     }
 
     return (

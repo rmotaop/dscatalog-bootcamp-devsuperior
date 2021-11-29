@@ -36,8 +36,18 @@ async function setAsyncKeys(key:string, value:string){
   export async function isAuthenticated() {
       try {
         const token = await AsyncStorage.getItem("@token");
+
+        return token ? true : false;
         
       } catch (e) {
         console.log(e);
       }
+  }
+
+  export async function doLogout(){
+    try {
+      AsyncStorage.removeItem("@token");
+    } catch (e) {
+      console.log(e);
+    }
   }
