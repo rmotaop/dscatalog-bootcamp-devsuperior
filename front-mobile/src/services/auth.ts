@@ -48,6 +48,12 @@ async function setAsyncKeys(key:string, value:string){
     try {
       AsyncStorage.removeItem("@token");
     } catch (e) {
-      console.log(e);
+      console.warn(e);
     }
+  }
+
+  export async function userToken() {
+    const token = await AsyncStorage.getItem("@token");
+
+    return token;
   }

@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from "react";
-
 import {View, Text, ScrollView, TouchableOpacity, Image, Modal, TextInput, ActivityIndicator, Alert } from "react-native";
-
 import arrow from "../../../assets/leftArrow.png";
-import { getCategories } from "../../../services";
-
+import { createProduct, getCategories } from "../../../services";
 import { theme, text } from "../../../styles";
+import Toast from 'react-native-tiny-toast';
 
 interface FormProductProps {
     setScreen: Function;
@@ -38,13 +36,22 @@ const FormProduct: React.FC<FormProductProps> = ( props ) => {
     async function newProduct() {
         setLoading(true);
         const cat = replaceCategory();
-        const data = { ...product, categories: [
+        const data = { 
+            ...product, 
+            categories: [
             {
                id: cat, 
             },
-           ],
+          ],
         };
-        console.warn(data);
+        try {
+            await createProduct(data);
+            Toast.showSuccess("produto criado com sucesso!");
+        } catch (res) {
+            Toast.show("erro ao salvar...");
+        }
+        setLoading(false);
+        
     }
 
     function replaceCategory() {
