@@ -23,7 +23,7 @@ import com.devsuperior.dscatalog.components.JwtTokenEnhancer;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
 
 	@Value("${security.oauth2.client.client-id}")
-	private String clientID;
+	private String clientId;
 	
 	@Value("${security.oauth2.client.client-secret}")
 	private String clientSecret;
@@ -57,7 +57,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient(clientID)
+		.withClient(clientId)
 		.secret(passwordEncoder.encode(clientSecret))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password")
