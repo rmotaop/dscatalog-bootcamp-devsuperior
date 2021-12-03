@@ -5,13 +5,18 @@ import {theme, text } from '../styles/';
 import arrow from '../assets/leftArrow.png';
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
+import { TextInputMask } from "react-native-masked-text";
+
+
 
 
 const ProductDetails = ({ 
+              
         route: {   
             params: { id },
          }, 
         }) => {
+
     const navigation = useNavigation();
 
     const [ product, setProduct ] = useState({
@@ -57,7 +62,22 @@ const ProductDetails = ({
                     <Text style={text.productDetailsName}>{product.name}</Text>
                     <View style={theme.priceContainer}>
                         <Text style={text.currency}>R$</Text>
-                        <Text style={text.productPrice}>{product.price}</Text>
+                        {/*<Text style={text.productPrice}>{product.price}</Text>*/}
+                        <TextInputMask
+                            type={"money"}
+                            options={{
+                                precision: 2,
+                                separator: ",",
+                                delimiter: ".",
+                                unit: " ",
+                                suffixUnit: "",
+
+                            }}
+                            value={product.price}
+                            editable={false}
+                            style={text.productPrice}
+                
+                    /> 
                     </View>
                     <ScrollView style={theme.scrollTextContainer}>
                         <Text style={text.productDescription}>

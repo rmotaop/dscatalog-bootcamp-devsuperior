@@ -1,14 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { text, theme } from "../styles";
-import { TextInputMask } from "react-native-masked-text";
+
 
 interface ProductProps {
     id: number;
     name: String;
-    imgUrl: String;
-    price: String;
     role?: string;
     handleDelete: Function;
     handleEdit: Function;
@@ -17,8 +15,6 @@ interface ProductProps {
 const ProductCard: React.FC<ProductProps>  = ({
         id, 
         name, 
-        imgUrl, 
-        price, 
         role,
         handleDelete,
         handleEdit,
@@ -29,29 +25,11 @@ const ProductCard: React.FC<ProductProps>  = ({
             style={theme.productCard} 
             onPress={() => role ? "" : navigation.navigate("ProductDetails", {id})}
         >
-            <Image source={{uri: imgUrl}} style={theme.productImg}/>
+           
             <View style={theme.productDescription}>
                 <Text style={text.productName}>{name}</Text>
            
-            <View style={theme.priceContainer}>
-                <Text style={text.currency}>R$ </Text>
-                <TextInputMask
-                    type={"money"}
-                    options={{
-                        precision: 2,
-                        separator: ",",
-                        delimiter: ".",
-                        unit: " ",
-                        suffixUnit: "",
 
-                    }}
-                    value={price}
-                    editable={false}
-                    style={text.productPrice}
-                
-                /> 
-                { /* <Text style={text.productPrice}>{price}</Text>*/}
-            </View>
             {
                 role === "admin" && (
                     <View style={theme.buttonContainer}>

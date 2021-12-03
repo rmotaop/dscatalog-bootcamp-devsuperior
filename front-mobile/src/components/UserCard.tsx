@@ -2,23 +2,23 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { text, theme } from "../styles";
-import { TextInputMask } from "react-native-masked-text";
 
-interface ProductProps {
+
+interface UserProps {
     id: number;
-    name: String;
-    imgUrl: String;
-    price: String;
+    firstName: String;
+    lastName: String,
+    email: String,
     role?: string;
     handleDelete: Function;
     handleEdit: Function;
 }
 
-const ProductCard: React.FC<ProductProps>  = ({
+const ProductCard: React.FC<UserProps>  = ({
         id, 
-        name, 
-        imgUrl, 
-        price, 
+        firstName,
+        lastName,
+        email, 
         role,
         handleDelete,
         handleEdit,
@@ -29,29 +29,16 @@ const ProductCard: React.FC<ProductProps>  = ({
             style={theme.productCard} 
             onPress={() => role ? "" : navigation.navigate("ProductDetails", {id})}
         >
-            <Image source={{uri: imgUrl}} style={theme.productImg}/>
-            <View style={theme.productDescription}>
-                <Text style={text.productName}>{name}</Text>
            
-            <View style={theme.priceContainer}>
-                <Text style={text.currency}>R$ </Text>
-                <TextInputMask
-                    type={"money"}
-                    options={{
-                        precision: 2,
-                        separator: ",",
-                        delimiter: ".",
-                        unit: " ",
-                        suffixUnit: "",
+            <View style={theme.userData}>
+                <Text style={text.campInfo}> Nome  / email</Text>
+                <View style={theme.userInfo}>
+                    <Text style={text.userName}> {firstName }</Text>
+                    <Text style={text.userName}> {lastName }</Text>
+                    <Text style={text.userName}> / </Text>
+                    <Text style={text.emailName}> {email }</Text>
+                </View>
 
-                    }}
-                    value={price}
-                    editable={false}
-                    style={text.productPrice}
-                
-                /> 
-                { /* <Text style={text.productPrice}>{price}</Text>*/}
-            </View>
             {
                 role === "admin" && (
                     <View style={theme.buttonContainer}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { Text, ScrollView, TouchableOpacity, ActivityIndicator} from "react-native";
-import { SearchInput, ProductCard} from "../../../components";
-import { deleteProduct, getProducts } from "../../../services";
+import { SearchInput, UserCard} from "../../../components";
+import { deleteUser, getUsers } from "../../../services";
 
 import { admin, text } from "../../../styles";
 
@@ -10,18 +10,18 @@ interface ProductsProps {
     setProductId: Function;
 }
 
-const Products: React.FC<ProductsProps> = ( props ) => {
+const Users: React.FC<ProductsProps> = ( props ) => {
     
     const [search, setSearch ] = useState("");
-    const [products, setProducts] = useState([]);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const { setScreen, setProductId } = props;
 
     async function handleDelete(id: number) {
         setLoading(true);
-        const res = await deleteProduct(id);
-        fillProducts();
+        const res = await deleteUser(id);
+        fillUsers();
     }
 
     function handleEdit(id: number) {
@@ -29,20 +29,20 @@ const Products: React.FC<ProductsProps> = ( props ) => {
         setScreen("editProduct");
     }
 
-    async function fillProducts(){
+    async function fillUsers(){
         setLoading(true);
-        const res = await getProducts();
+        const res = await getUsers();
 
-        setProducts(res.data.content);
+        setUsers(res.data.content);
         setLoading(false);
 
     }
 
     useEffect(()=> {
-        fillProducts();
+        fillUsers();
     }, []);
 
-    const data = search.length > 0 ? products.filter(product => product.name.toLowerCase().includes(search.toLowerCase())) : products;
+    const data = search.length > 0 ? users.filter(user => user.firstName.toLowerCase().includes(search.toLowerCase())) : users;
 
     return (
         <ScrollView contentContainerStyle={admin.container}>
@@ -52,16 +52,16 @@ const Products: React.FC<ProductsProps> = ( props ) => {
             <SearchInput 
                 search={search} 
                 setSearch={setSearch} 
-                placeholder="Nome do produto"
+                placeholder="Nome do usuário"
             />
             { loading ? (<ActivityIndicator size="large" />
             ) : ( 
-                data.map((product) => {
-                    const { id } = product;
+                data.map((user) => {
+                    const { id } = user;
                   return (
 
-                  <ProductCard  
-                    {...product} 
+                  <UserCard  
+                    {...user} 
                     key={id} 
                     role="admin"
                     handleDelete={handleDelete}
@@ -74,4 +74,4 @@ const Products: React.FC<ProductsProps> = ( props ) => {
     )
 }
 
-export default Products;
+export default Users;

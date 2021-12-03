@@ -1,84 +1,43 @@
 import React, {useState, useEffect} from "react";
 import {View, Text, ScrollView, TouchableOpacity, Image, Modal, TextInput, ActivityIndicator, Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 import arrow from "../../../assets/leftArrow.png";
-import { createProduct, getCategories, uploadImage } from "../../../services";
+import { createCategory, getCategories } from "../../../services";
 import { theme, text } from "../../../styles";
 import Toast from 'react-native-tiny-toast';
-import {TextInputMask } from "react-native-masked-text";
 
-interface FormProductProps {
+
+interface FormCategoryProps {
     setScreen: Function;
 };
 
-const FormProduct: React.FC<FormProductProps> = ( props ) => {
+const FormProduct: React.FC<FormCategoryProps> = ( props ) => {
 
     const { setScreen } = props;
     const [ loading, setLoading ] = useState(false);
     const [ categories, setCategories ] = useState([])
     const [ showCategories, setShowCategories ] = useState(false);
-    const [ product, setProduct ] = useState({
+    const [ category, setCategory ] = useState({
         name: "",
-        description: "",
-        imgUrl: "",
-        price: "",
-        categories: [],
+
     });
 
-    const [ image, setImage ] = useState("");
-
-    useEffect(() => {
-            async () => {
-                 const { status } = await ImagePicker.requestCameraPermissionsAsync();
-                 if(status !== 'granted') {
-                     Alert.alert("Precisamos de acesso a biblioteca de imagens!")
-                 }
-            }
-    }, [])
-
-    async function selectImage() {
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-        !result.cancelled && setImage(result.uri);
-    }
-
-    async function handleUpload() {
-        uploadImage(image).then((res) => {
-            const { uri } = res?.data;
-            setProduct({ ...product, imgUrl: uri});
-        });
-    }
-
-    useEffect(() => {
-        image ? handleUpload() : null
-    }, [image])   
-
     function handleSave() {
-        newProduct();
+        newCategory();
     }
 
 
 
-    async function newProduct() {
+    async function newCategory() {
         setLoading(true);
         const cat = replaceCategory();
         const data = { 
-            ...product,
-            price: getRaw(), 
-            categories: [
-            {
-               id: cat, 
-            },
-          ],
+            ...category,
+            
         };
         try {
-            await createProduct(data);
-            setScreen("products");
-            Toast.showSuccess("produto criado com sucesso!");
+            await createCategory(data);
+            setScreen("categories");
+            Toast.showSuccess("categoria criada com sucesso!");
         } catch (res) {
             Toast.show("erro ao salvar...");
         }
@@ -87,7 +46,7 @@ const FormProduct: React.FC<FormProductProps> = ( props ) => {
     }
 
     function replaceCategory() {
-        const cat = categories.find( category => category.name === product.categories );
+        const cat = categories.find(category => categories.name );
         return cat.id;
     }
 
@@ -98,14 +57,6 @@ const FormProduct: React.FC<FormProductProps> = ( props ) => {
 
         setLoading(false);
     }
-
-    function getRaw() {
-        const str = product.price;
-        const res = str.slice(2).replace(/\./g, "").replace(/./g, ".");
-
-        return res;
-    }
-
 
     useEffect(() => {
         loadCategories();
@@ -134,7 +85,7 @@ const FormProduct: React.FC<FormProductProps> = ( props ) => {
                                                 style={theme.modalItem}
                                                 key={cat.id}
                                                 onPress={() => {
-                                                    setProduct({...product, categories: cat.name });
+                                                    setCategory({ ...category });
                                                     setShowCategories(!showCategories);
                                                 }}
                                               >
@@ -147,16 +98,16 @@ const FormProduct: React.FC<FormProductProps> = ( props ) => {
                         </Modal>
                         <TouchableOpacity 
                             style={theme.goBackContainer}
-                            onPress={() => setScreen("products")}>
+                            onPress={() => setScreen("categories")}>
                             <Image source={arrow}/>
                             <Text style={text.goBackText}>Voltar</Text>
                         </TouchableOpacity>
 
                         <TextInput 
-                            placeholder="nome do produto" 
+                            placeholder="nome da categoria" 
                             style={theme.formInput}
-                            value={product.name}
-                            onChangeText={(e) => setProduct({...product, name: e})}
+                            value={category.name}
+                            onChangeText={(e) => setCategory({...category, name: e})}
                         />
 
                         <TouchableOpacity 
@@ -164,7 +115,7 @@ const FormProduct: React.FC<FormProductProps> = ( props ) => {
                             onPress={() => setShowCategories(!showCategories)}
                         >
                             <Text 
-                                style={product.categories.length === 0 
+                                style={category.length === 0 
                                     ? 
                                     {color: "#cecece"}
                                     : 

@@ -2,6 +2,10 @@ import "react-native-gesture-handler";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Routes from "./src/routes";
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 
 const App: React.FC = () => {
