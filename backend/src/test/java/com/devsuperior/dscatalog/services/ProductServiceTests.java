@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.tests.services;
+package com.devsuperior.dscatalog.services;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;

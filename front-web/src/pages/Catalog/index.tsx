@@ -20,7 +20,7 @@ const Catalog = () => {
     const getProducts = useCallback(() => {
         const params = {
             page: activePage,
-            linesPerPage: 12,
+            linesPerPage: 14,
             name,
             categoryId: category?.id
 

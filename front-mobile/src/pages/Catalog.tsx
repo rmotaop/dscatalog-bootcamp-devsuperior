@@ -16,7 +16,7 @@ const Catalog: React.FC = () => {
     async function fillProducts(){
         setLoading(true);
         const res = await api.get(
-            `/products?page=0&linesPerPage=12&direction=ASC&orderBy=name`
+            `/products?page=0&linesPerPage=14&direction=ASC&orderBy=name`
             );
 
         setProducts(res.data.content);
