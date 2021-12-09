@@ -28,9 +28,9 @@ In this project, topics such as tests with Junit, integration with image storage
 </div>
 ## Mobile App
 <div align="center">
-   <img src="https://github.com/rmotaop/dscatalog-bootcamp-devsuperior/blob/main/assets/mobile-init.png" width="600" />
-   <img src="https://github.com/rmotaop/dscatalog-bootcamp-devsuperior/blob/main/assets/mobile-login.png" width="600" /> 
-   <img src="https://github.com/rmotaop/dscatalog-bootcamp-devsuperior/blob/main/assets/mobile-list-products.png" width="600" /> 
+   <img src="https://github.com/rmotaop/dscatalog-bootcamp-devsuperior/blob/main/assets/mobile-init.PNG" width="600" />
+   <img src="https://github.com/rmotaop/dscatalog-bootcamp-devsuperior/blob/main/assets/mobile-login.PNG" width="600" /> 
+   <img src="https://github.com/rmotaop/dscatalog-bootcamp-devsuperior/blob/main/assets/mobile-list-products.PNG" width="600" /> 
 </div>
 
 # Portugues Brasileiro - Sobre o Projeto:
